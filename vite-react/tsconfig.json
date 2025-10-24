@@ -1,0 +1,22 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ],
+  "models": [
+    {
+      "title": "DeepSeek 7b",
+      "provider": "ollama",
+      "model": "deepseek-r1:7b",
+      "apiBase": "http://localhost:11434",
+      "apiKey": "{{ secrets.PROVIDER_API_KEY }}"
+    }
+  ],
+  "tabAutocompleteModel": {
+    "title": "DeepSeek 7b",
+    "provider": "ollama",
+    "model": "deepseek-r1:7b",
+    "apiBase": "http://localhost:11434"
+  }
+}
