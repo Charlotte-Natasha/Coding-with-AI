@@ -1,14 +1,19 @@
-version: '3.8'
 
 services:
   postgresql:
     image: postgres:13
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    command: psql -U postgres -d postgres_data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+
 
   back-fastapi:
-    image: fastapi:latest
+    build: ./back-fastapi
     volumes:
       - .:/app
       - ./data:/app.data
@@ -16,11 +21,12 @@ services:
       - postgresql
     command: uvicorn main:app --host 0.0.0.0 --port 8000
 
-  vite-project:
-    image: vite:vite@master
-    volumes:
-      - .:/vite/vite-react-app
-    command: 'cd /vite/vite-react-app && vite build'
+  vite-react:
+    build: ./vite-project
+    container_name: vite_container
+    ports:
+      - "5173:5173"
+    command: npm run dev
 
 volumes:
   postgres_data:
