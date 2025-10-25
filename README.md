@@ -1,4 +1,3 @@
-
 # To run the docker file on main file 
 docker compose up postgresql
 
